@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voor Lisa 💕</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #fdeff2;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .slide {
+      display: none;
+      max-width: 600px;
+      padding: 20px;
+      animation: fade 1s;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #ff7aa2;
+      color: white;
+    }
+
+    .choices button {
+      margin: 10px;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide active">
+    <h1>Hoi Lisa 💕</h1>
+    <p>Ik wil je iets kleins laten zien.</p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
+
+  <div class="slide">
+    <p>Sinds 12 maart is mijn leven langzaam maar zeker<br>
+    een stuk mooier geworden.</p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
+
+  <div class="slide">
+    <p>
+      Jij maakt mij een beter persoon.<br>
+      Jij laat mij nieuwe dingen ontdekken.<br>
+      Jouw humor en jouw lach zijn het allermooist ❤️
+    </p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
+
+  <div class="slide">
+    <p>
+      Ik wil samen blijven groeien<br>
+      en nieuwe herinneringen maken.
+    </p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
+
+  <div class="slide">
+    <h2>Lisa, wil jij mijn Valentijn zijn? 🌹</h2>
+    <div class="choices">
+      <button onclick="yes()">Ja ❤️</button>
+      <button onclick="yes()">Heel graag 💕</button>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h1>💖</h1>
+    <p>Ik ben heel blij met jou.</p>
+  </div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current++;
+    slides[current].classList.add('active');
+  }
+
+  function yes() {
+    nextSlide();
+  }
+</script>
+
+</body>
+</html>
