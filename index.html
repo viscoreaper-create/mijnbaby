@@ -26,7 +26,19 @@
     padding: 10px 20px;
     font-size: 16px;
   }
-</style>
+</style> 
+  .floating {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp 8s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
 </head>
 
 <body>
@@ -50,6 +62,15 @@
     slides[i].classList.add('active');
   }
 </script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.textContent = "❤️";
+  heart.className = "floating";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (16 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}, 700);
 
 </body>
 </html>
