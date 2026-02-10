@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #fdeff2, #fff);
+      background: #ffe4ed;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -60,24 +60,15 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ❤️ Zwevende hartjes */
-    .heart {
+    .floating {
       position: absolute;
-      bottom: -20px;
-      font-size: 20px;
       animation: floatUp 8s linear infinite;
-      opacity: 0.6;
+      opacity: 0.7;
     }
-
+    
     @keyframes floatUp {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 0.6;
-      }
-      to {
-        transform: translateY(-110vh) scale(1.5);
-        opacity: 0;
-      }
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-110vh) scale(1.2); opacity: 0; }
     }
   </style>
 </head>
@@ -131,7 +122,7 @@
   </div>
 
 <script>
-  /* Slides */
+  /* Slideshow */
   let current = 0;
   const slides = document.querySelectorAll('.slide');
 
@@ -145,24 +136,11 @@
     nextSlide();
   }
 
-  /* Zwevende hartjes */
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerText = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
-    heart.style.fontSize = (14 + Math.random() * 20) + 'px';
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 10000);
-  }
-
-  setInterval(createHeart, 600);
-</script>
-
-</body>
-</html>
+  /* Zwevende hartjes + Squishmallows */
+  function createFloating() {
+    const el = document.createElement('div');
+    const type = Math.random() < 0.6 ? '❤️' : '🧀'; 
+    el.className = 'floating';
+    el.innerText = type;
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (14 + Math
