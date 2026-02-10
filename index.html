@@ -1,99 +1,105 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Voor Lisa 💕</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Voor Lisa 💕</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #ffe4ed;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #333;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #ffe4ed;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-    .slide {
-      display: none;
-      padding: 24px;
-      max-width: 90%;
-      animation: fade 0.8s ease;
-      z-index: 2;
-    }
+  .container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
 
-    .slide.active {
-      display: block;
-    }
+  .slide {
+    display: none;
+    max-width: 500px;
+    animation: fade 0.6s ease;
+  }
 
-    h1, h2 {
-      font-weight: 600;
-    }
+  .slide.active {
+    display: block;
+  }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
+  h1, h2 {
+    font-weight: 600;
+  }
 
-    button {
-      margin-top: 32px;
-      padding: 14px 28px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      background: #ff7aa2;
-      color: white;
-      cursor: pointer;
-    }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
 
-    .choices button {
-      margin: 10px;
-    }
+  button {
+    margin-top: 30px;
+    padding: 14px 26px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    background: #ff7aa2;
+    color: white;
+    cursor: pointer;
+  }
 
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .choices button {
+    margin: 10px;
+  }
 
-    /* Zwevende elementen */
-    .floating {
-      position: absolute;
-      bottom: -40px;
-      animation: floatUp linear forwards;
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Floating hearts & Mannon */
+  .floating {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear forwards;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
       opacity: 0.9;
-      z-index: 1;
     }
-
-    @keyframes floatUp {
-      from {
-        transform: translateY(0);
-        opacity: 0.9;
-      }
-      to {
-        transform: translateY(-120vh);
-        opacity: 0;
-      }
+    to {
+      transform: translateY(-120vh);
+      opacity: 0;
     }
-  </style>
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Slides -->
+<div class="container">
+
   <div class="slide active">
     <h1>Hoi Lisa 💕</h1>
-    <p>Ik wil je iets kleins laten zien.</p>
+    <p>Ik wil je iets laten zien.</p>
     <button onclick="nextSlide()">Verder</button>
   </div>
 
   <div class="slide">
     <p>
-      Sinds 12 maart is mijn leven langzaam maar zeker<br>
+      Sinds 12 maart is mijn leven<br>
       een stuk mooier geworden.<br>
       Bijna een jaar samen ❤️
     </p>
@@ -130,47 +136,48 @@
     <p>Ik ben heel blij met jou.</p>
   </div>
 
+</div>
+
 <script>
-  /* Slides */
-  let current = 0;
-  const slides = document.querySelectorAll('.slide');
+let current = 0;
+const slides = document.querySelectorAll('.slide');
 
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current++;
-    slides[current].classList.add('active');
+function nextSlide() {
+  slides[current].classList.remove('active');
+  current++;
+  slides[current].classList.add('active');
+}
+
+function yes() {
+  nextSlide();
+}
+
+/* Floating hearts & Mannon */
+function createFloating() {
+  const isHeart = Math.random() < 0.6;
+
+  if (isHeart) {
+    const heart = document.createElement('div');
+    heart.className = 'floating';
+    heart.textContent = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+  } else {
+    const img = document.createElement('img');
+    img.className = 'floating';
+    img.src = 'mannon.png';
+    img.style.left = Math.random() * 100 + 'vw';
+    img.style.width = (30 + Math.random() * 30) + 'px';
+    img.style.animationDuration = (7 + Math.random() * 4) + 's';
+    document.body.appendChild(img);
+    setTimeout(() => img.remove(), 10000);
   }
+}
 
-  function yes() {
-    nextSlide();
-  }
-
-  /* Zwevende hartjes + Mannon */
-  function createFloating() {
-    const isHeart = Math.random() < 0.6;
-
-    if (isHeart) {
-      const heart = document.createElement('div');
-      heart.className = 'floating';
-      heart.innerText = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
-      heart.style.animationDuration = (6 + Math.random() * 4) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 10000);
-    } else {
-      const img = document.createElement('img');
-      img.className = 'floating';
-      img.src = 'mannon.png'; // jouw afbeelding
-      img.style.left = Math.random() * 100 + 'vw';
-      img.style.width = (30 + Math.random() * 30) + 'px';
-      img.style.animationDuration = (7 + Math.random() * 4) + 's';
-      document.body.appendChild(img);
-      setTimeout(() => img.remove(), 10000);
-    }
-  }
-
-  setInterval(createFloating, 600);
+setInterval(createFloating, 700);
 </script>
 
 </body>
