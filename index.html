@@ -2,40 +2,53 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Voor Lisa 💕</title>
+
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #fdeff2;
-      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fdeff2, #fff);
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       text-align: center;
+      color: #333;
     }
 
     .slide {
       display: none;
-      max-width: 600px;
-      padding: 20px;
-      animation: fade 1s;
+      padding: 24px;
+      max-width: 90%;
+      animation: fade 0.8s ease;
+      z-index: 2;
     }
 
     .slide.active {
       display: block;
     }
 
+    h1, h2 {
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
     button {
-      margin-top: 30px;
-      padding: 12px 24px;
+      margin-top: 32px;
+      padding: 14px 28px;
       font-size: 16px;
       border: none;
-      border-radius: 20px;
-      cursor: pointer;
+      border-radius: 30px;
       background: #ff7aa2;
       color: white;
+      cursor: pointer;
     }
 
     .choices button {
@@ -43,13 +56,35 @@
     }
 
     @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ❤️ Zwevende hartjes */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- Slides -->
   <div class="slide active">
     <h1>Hoi Lisa 💕</h1>
     <p>Ik wil je iets kleins laten zien.</p>
@@ -57,8 +92,11 @@
   </div>
 
   <div class="slide">
-    <p>Sinds 12 maart is mijn leven langzaam maar zeker<br>
-    een stuk mooier geworden.</p>
+    <p>
+      Sinds 12 maart is mijn leven langzaam maar zeker<br>
+      een stuk mooier geworden.<br>
+      Bijna een jaar samen ❤️
+    </p>
     <button onclick="nextSlide()">Verder</button>
   </div>
 
@@ -66,7 +104,7 @@
     <p>
       Jij maakt mij een beter persoon.<br>
       Jij laat mij nieuwe dingen ontdekken.<br>
-      Jouw humor en jouw lach zijn het allermooist ❤️
+      Jouw humor en jouw lach zijn het allermooist 💕
     </p>
     <button onclick="nextSlide()">Verder</button>
   </div>
@@ -93,6 +131,7 @@
   </div>
 
 <script>
+  /* Slides */
   let current = 0;
   const slides = document.querySelectorAll('.slide');
 
@@ -105,6 +144,24 @@
   function yes() {
     nextSlide();
   }
+
+  /* Zwevende hartjes */
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+    heart.style.fontSize = (14 + Math.random() * 20) + 'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 10000);
+  }
+
+  setInterval(createHeart, 600);
 </script>
 
 </body>
