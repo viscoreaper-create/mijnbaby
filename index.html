@@ -1,183 +1,54 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Voor Lisa 💕</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test</title>
 <style>
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #ffe4ed;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .container {
-    position: relative;
-    z-index: 10;
+    background: pink;
+    font-family: sans-serif;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 20px;
   }
-
   .slide {
     display: none;
-    max-width: 500px;
-    animation: fade 0.6s ease;
+    text-align: center;
   }
-
   .slide.active {
     display: block;
   }
-
-  h1, h2 {
-    font-weight: 600;
-  }
-
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-
   button {
-    margin-top: 30px;
-    padding: 14px 26px;
+    margin-top: 20px;
+    padding: 10px 20px;
     font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    background: #ff7aa2;
-    color: white;
-    cursor: pointer;
-  }
-
-  .choices button {
-    margin: 10px;
-  }
-
-  @keyframes fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Floating hearts & Mannon */
-  .floating {
-    position: absolute;
-    bottom: -50px;
-    animation: floatUp linear forwards;
-    opacity: 0.9;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  @keyframes floatUp {
-    from {
-      transform: translateY(0);
-      opacity: 0.9;
-    }
-    to {
-      transform: translateY(-120vh);
-      opacity: 0;
-    }
   }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="slide active">
+  <h1>Hoi Lisa 💕</h1>
+  <button onclick="next()">Verder</button>
+</div>
 
-  <div class="slide active">
-    <h1>Hoi Lisa 💕</h1>
-    <p>Ik wil je iets laten zien.</p>
-    <button onclick="nextSlide()">Verder</button>
-  </div>
-
-  <div class="slide">
-    <p>
-      Sinds 12 maart is mijn leven<br>
-      een stuk mooier geworden.<br>
-      Bijna een jaar samen ❤️
-    </p>
-    <button onclick="nextSlide()">Verder</button>
-  </div>
-
-  <div class="slide">
-    <p>
-      Jij maakt mij een beter persoon.<br>
-      Jij laat mij nieuwe dingen ontdekken.<br>
-      Jouw humor en jouw lach zijn het allermooist 💕
-    </p>
-    <button onclick="nextSlide()">Verder</button>
-  </div>
-
-  <div class="slide">
-    <p>
-      Ik wil samen blijven groeien<br>
-      en nieuwe herinneringen maken.
-    </p>
-    <button onclick="nextSlide()">Verder</button>
-  </div>
-
-  <div class="slide">
-    <h2>Lisa, wil jij mijn Valentijn zijn? 🌹</h2>
-    <div class="choices">
-      <button onclick="yes()">Ja ❤️</button>
-      <button onclick="yes()">Heel graag 💕</button>
-    </div>
-  </div>
-
-  <div class="slide">
-    <h1>💖</h1>
-    <p>Ik ben heel blij met jou.</p>
-  </div>
-
+<div class="slide">
+  <h1>Wil jij mijn Valentijn zijn?</h1>
 </div>
 
 <script>
-let current = 0;
-const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  const slides = document.querySelectorAll('.slide');
 
-function nextSlide() {
-  slides[current].classList.remove('active');
-  current++;
-  slides[current].classList.add('active');
-}
-
-function yes() {
-  nextSlide();
-}
-
-/* Floating hearts & Mannon */
-function createFloating() {
-  const isHeart = Math.random() < 0.6;
-
-  if (isHeart) {
-    const heart = document.createElement('div');
-    heart.className = 'floating';
-    heart.textContent = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (16 + Math.random() * 20) + 'px';
-    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 10000);
-  } else {
-    const img = document.createElement('img');
-    img.className = 'floating';
-    img.src = 'mannon.png';
-    img.style.left = Math.random() * 100 + 'vw';
-    img.style.width = (30 + Math.random() * 30) + 'px';
-    img.style.animationDuration = (7 + Math.random() * 4) + 's';
-    document.body.appendChild(img);
-    setTimeout(() => img.remove(), 10000);
+  function next() {
+    slides[i].classList.remove('active');
+    i++;
+    slides[i].classList.add('active');
   }
-}
-
-setInterval(createFloating, 700);
 </script>
 
 </body>
