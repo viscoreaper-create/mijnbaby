@@ -18,28 +18,10 @@
       text-align: center;
       color: #333;
     }
-
-    .slide {
-      display: none;
-      padding: 24px;
-      max-width: 90%;
-      animation: fade 0.8s ease;
-      z-index: 2;
-    }
-
-    .slide.active {
-      display: block;
-    }
-
-    h1, h2 {
-      font-weight: 600;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
+    .slide { display: none; padding: 24px; max-width: 90%; animation: fade 0.8s ease; z-index: 2; }
+    .slide.active { display: block; }
+    h1, h2 { font-weight: 600; }
+    p { font-size: 1.1rem; line-height: 1.6; }
     button {
       margin-top: 32px;
       padding: 14px 28px;
@@ -50,32 +32,14 @@
       color: white;
       cursor: pointer;
     }
-
-    .choices button {
-      margin: 10px;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .floating {
-      position: absolute;
-      animation: floatUp 8s linear infinite;
-      opacity: 0.7;
-    }
-    
-    @keyframes floatUp {
-      from { transform: translateY(0) scale(1); }
-      to { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-    }
+    .choices button { margin: 10px; }
+    @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); }}
+    .floating { position: absolute; animation: floatUp 8s linear infinite; opacity: 0.8; }
+    @keyframes floatUp { from { transform: translateY(0) scale(1); } to { transform: translateY(-110vh) scale(1.2); opacity: 0; } }
   </style>
 </head>
-
 <body>
 
-  <!-- Slides -->
   <div class="slide active">
     <h1>Hoi Lisa 💕</h1>
     <p>Ik wil je iets kleins laten zien.</p>
@@ -122,25 +86,26 @@
   </div>
 
 <script>
-  /* Slideshow */
   let current = 0;
   const slides = document.querySelectorAll('.slide');
+  function nextSlide() { slides[current].classList.remove('active'); current++; slides[current].classList.add('active'); }
+  function yes() { nextSlide(); }
 
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current++;
-    slides[current].classList.add('active');
-  }
-
-  function yes() {
-    nextSlide();
-  }
-
-  /* Zwevende hartjes + Squishmallows */
   function createFloating() {
-    const el = document.createElement('div');
-    const type = Math.random() < 0.6 ? '❤️' : '🧀'; 
-    el.className = 'floating';
-    el.innerText = type;
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.fontSize = (14 + Math
+    const img = document.createElement('img');
+    img.className = 'floating';
+    img.style.left = Math.random()*100+'vw';
+    img.style.width = (30 + Math.random()*30)+'px';
+
+    // Afbeelding van Mannon the Gouda Cheese (thumbnail)
+    img.src = "https://cdn.bol.com/imgbase0/imagebase3/large/9300000154205335.jpg"; // voorbeeld :contentReference[oaicite:2]{index=2}
+
+    document.body.appendChild(img);
+    setTimeout(()=>img.remove(), 10000);
+  }
+
+  setInterval(createFloating, 700);
+</script>
+
+</body>
+</html>
