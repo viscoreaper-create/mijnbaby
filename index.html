@@ -1,113 +1,167 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voor Lisa 💕</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voor Lisa 💕</title>
 
-<style>
-body {
-  margin: 0;
-  background: #ffe4ed;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fdeff2, #fff);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #333;
+    }
 
-.slide {
-  display: none;
-  max-width: 90%;
-  z-index: 10;
-}
+    .slide {
+      display: none;
+      padding: 24px;
+      max-width: 90%;
+      animation: fade 0.8s ease;
+      z-index: 2;
+    }
 
-.slide.active {
-  display: block;
-}
+    .slide.active {
+      display: block;
+    }
 
-button {
-  margin-top: 24px;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 24px;
-  border: none;
-  background: #ff7aa2;
-  color: white;
-}
+    h1, h2 {
+      font-weight: 600;
+    }
 
-.floating {
-  position: absolute;
-  bottom: -40px;
-  animation: floatUp 8s linear forwards;
-  pointer-events: none;
-  z-index: 1;
-}
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
 
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
-}
-</style>
+    button {
+      margin-top: 32px;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      background: #ff7aa2;
+      color: white;
+      cursor: pointer;
+    }
+
+    .choices button {
+      margin: 10px;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ❤️ Zwevende hartjes */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="slide active">
-  <h1>Hoi Lisa 💕</h1>
-  <p>Ik wil je iets laten zien.</p>
-  <button onclick="next()">Verder</button>
-</div>
+  <!-- Slides -->
+  <div class="slide active">
+    <h1>Hoi Lisa 💕</h1>
+    <p>Ik wil je iets kleins laten zien.</p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
 
-<div class="slide">
-  <p>
-    Sinds 12 maart is mijn leven<br>
-    een stuk mooier geworden.<br>
-    Bijna een jaar samen ❤️
-  </p>
-  <button onclick="next()">Verder</button>
-</div>
+  <div class="slide">
+    <p>
+      Sinds 12 maart is mijn leven langzaam maar zeker<br>
+      een stuk mooier geworden.<br>
+      Bijna een jaar samen ❤️
+    </p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
 
-<div class="slide">
-  <p>
-    Jij maakt mij een beter persoon.<br>
-    Jij laat mij nieuwe dingen ontdekken.<br>
-    Jouw humor en jouw lach zijn het allermooist 💕
-  </p>
-  <button onclick="next()">Verder</button>
-</div>
+  <div class="slide">
+    <p>
+      Jij maakt mij een beter persoon.<br>
+      Jij laat mij nieuwe dingen ontdekken.<br>
+      Jouw humor en jouw lach zijn het allermooist 💕
+    </p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
 
-<div class="slide">
-  <h2>Lisa, wil jij mijn Valentijn zijn? 🌹</h2>
-  <button onclick="next()">Ja ❤️</button>
-</div>
+  <div class="slide">
+    <p>
+      Ik wil samen blijven groeien<br>
+      en nieuwe herinneringen maken.
+    </p>
+    <button onclick="nextSlide()">Verder</button>
+  </div>
 
-<div class="slide">
-  <h1>💖</h1>
-  <p>Ik ben heel blij met jou.</p>
-</div>
+  <div class="slide">
+    <h2>Lisa, wil jij mijn Valentijn zijn? 🌹</h2>
+    <div class="choices">
+      <button onclick="yes()">Ja ❤️</button>
+      <button onclick="yes()">Heel graag 💕</button>
+    </div>
+  </div>
+
+  <div class="slide">
+    <h1>💖</h1>
+    <p>Ik ben heel blij met jou.</p>
+  </div>
 
 <script>
-let i = 0;
-const slides = document.querySelectorAll(".slide");
+  /* Slides */
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
 
-function next() {
-  slides[i].classList.remove("active");
-  i++;
-  slides[i].classList.add("active");
-}
+  function nextSlide() {
+    slides[current].classList.remove('active');
+    current++;
+    slides[current].classList.add('active');
+  }
 
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.textContent = "❤️";
-  heart.className = "floating";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (16 + Math.random() * 20) + "px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
-}, 700);
+  function yes() {
+    nextSlide();
+  }
+
+  /* Zwevende hartjes */
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+    heart.style.fontSize = (14 + Math.random() * 20) + 'px';
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 10000);
+  }
+
+  setInterval(createHeart, 600);
 </script>
 
 </body>
