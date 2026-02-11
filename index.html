@@ -67,6 +67,19 @@
       font-size: 20px;
       animation: floatUp 8s linear infinite;
       opacity: 0.6;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 🧀 Zwevende Mannon */
+    .mannon {
+      position: absolute;
+      bottom: -30px;
+      width: 32px;
+      opacity: 0.85;
+      animation: floatUp 9s linear infinite;
+      pointer-events: none;
+      z-index: 1;
     }
 
     @keyframes floatUp {
@@ -75,7 +88,7 @@
         opacity: 0.6;
       }
       to {
-        transform: translateY(-110vh) scale(1.5);
+        transform: translateY(-110vh) scale(1.4);
         opacity: 0;
       }
     }
@@ -145,23 +158,36 @@
     nextSlide();
   }
 
-  /* Zwevende hartjes */
+  /* Floating hearts & Mannon */
   function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'heart';
     heart.innerText = '❤️';
     heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
     heart.style.fontSize = (14 + Math.random() * 20) + 'px';
-
+    heart.style.animationDuration = (6 + Math.random() * 4) + 's';
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 10000);
+    setTimeout(() => heart.remove(), 10000);
   }
 
-  setInterval(createHeart, 600);
+  function createMannon() {
+    const img = document.createElement('img');
+    img.src = 'mannon.png';
+    img.className = 'mannon';
+    img.style.left = Math.random() * 100 + 'vw';
+    img.style.width = (24 + Math.random() * 24) + 'px';
+    img.style.animationDuration = (7 + Math.random() * 5) + 's';
+    document.body.appendChild(img);
+    setTimeout(() => img.remove(), 12000);
+  }
+
+  setInterval(() => {
+    if (Math.random() < 0.75) {
+      createHeart();
+    } else {
+      createMannon();
+    }
+  }, 600);
 </script>
 
 </body>
